@@ -1,0 +1,14 @@
+[Unit]
+Description=carbon.cc pihole
+#After=docker.service
+#Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+Restart=always
+ExecStartPre=-/opt/ccc/bin/ccc-pod -stop -f /opt/ccc/etc/pihole/ccc-pod.yaml
+ExecStart=/opt/ccc/bin/ccc-pod -start -f /opt/ccc/etc/pihole/ccc-pod.yaml
+ExecStop=/opt/ccc/bin/ccc-pod -stop -f /opt/ccc/etc/pihole/ccc-pod.yaml
+
+[Install]
+WantedBy=multi-user.target
